@@ -1,6 +1,5 @@
-
-const API_BASE_URL = "http://localhost:8080/api";
-const API_ORIGIN = "http://localhost:8080";
+const API_ORIGIN = "https://community-library-backend.onrender.com";
+const API_BASE_URL = `${API_ORIGIN}/api`;
 
 const resolveImageUrl = (url) => {
     if (!url) return url;
