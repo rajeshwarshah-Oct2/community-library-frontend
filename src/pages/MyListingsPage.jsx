@@ -7,7 +7,6 @@ import {
   apiGetLoggedInUser,
   apiDeleteItem,
   apiUpdateRequestStatus,
-  apiToggleItemAvailability,
   apiConfirmReturnByOwner
 } from "../services/api";
 
@@ -88,12 +87,6 @@ export default function MyListingsPage() {
   const handleConfirmReturnByOwner = async (requestId) => {
     await apiConfirmReturnByOwner(requestId);
     setMessage("Item return confirmed! Item is now available for others.");
-    loadData();
-  };
-
-  const handleToggleAvailability = async (itemId) => {
-    await apiToggleItemAvailability(itemId);
-    setMessage("Item availability updated successfully.");
     loadData();
   };
 
@@ -325,22 +318,7 @@ export default function MyListingsPage() {
                   <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "16px" }}>{item.description}</p>
 
                   <div style={{ marginTop: "auto", display: "flex", gap: "8px", paddingTop: "12px", borderTop: "1px solid var(--border-color)" }}>
-                    <button
-                      onClick={() => handleToggleAvailability(item.id)}
-                      style={{
-                        flex: 1,
-                        backgroundColor: item.availability === "Available" ? "#fef3c7" : "#d1fae5",
-                        color: item.availability === "Available" ? "#b45309" : "#065f46",
-                        border: "none",
-                        borderRadius: "6px",
-                        padding: "8px",
-                        fontSize: "13px",
-                        fontWeight: 600,
-                        cursor: "pointer"
-                      }}
-                    >
-                      Set {item.availability === "Available" ? "Borrowed" : "Available"}
-                    </button>
+
 
                     <button
                       onClick={() => handleDelete(item)}
