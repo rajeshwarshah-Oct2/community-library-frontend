@@ -139,87 +139,90 @@ export default function DashboardPage() {
           gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
           gap: "20px"
         }}>
-          {items.slice(0, 4).map((item) => (
-            <div
-              key={item.id}
-              style={{
-                backgroundColor: "#ffffff",
-                borderRadius: "12px",
-                border: "1px solid var(--border-color)",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column"
-              }}
-              className="hover-card"
-            >
-              <img
-                src={item.imageUrl}
-                alt={item.name}
+          {[...items]
+            .sort((a, b) => Number(b.id) - Number(a.id))
+            .slice(0, 4)
+            .map((item) => (
+              <div
+                key={item.id}
                 style={{
-                  width: "100%",
-                  height: "160px",
-                  objectFit: "contain",
-                  backgroundColor: "#f8fafc"
+                  backgroundColor: "#ffffff",
+                  borderRadius: "12px",
+                  border: "1px solid var(--border-color)",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column"
                 }}
-              />
-              <div style={{ padding: "16px", display: "flex", flexDirection: "column", flex: 1 }}>
-                <span style={{
-                  alignSelf: "flex-start",
-                  backgroundColor: "#f1f5f9",
-                  color: "var(--text-muted)",
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  padding: "4px 8px",
-                  borderRadius: "6px",
-                  marginBottom: "8px"
-                }}>
-                  {item.category}
-                </span>
-                <h4 style={{ fontSize: "15px", fontWeight: 600, marginBottom: "6px" }}>{item.name}</h4>
-                <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "16px" }}>
-                  Owner: {item.ownerName} ({item.building})
-                </p>
-                <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                className="hover-card"
+              >
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  style={{
+                    width: "100%",
+                    height: "160px",
+                    objectFit: "contain",
+                    backgroundColor: "#f8fafc"
+                  }}
+                />
+                <div style={{ padding: "16px", display: "flex", flexDirection: "column", flex: 1 }}>
                   <span style={{
-                    fontSize: "12px",
+                    alignSelf: "flex-start",
+                    backgroundColor: "#f1f5f9",
+                    color: "var(--text-muted)",
+                    fontSize: "11px",
                     fontWeight: 600,
-                    color: item.availability === "Available" ? "#059669" : "#d97706"
+                    padding: "4px 8px",
+                    borderRadius: "6px",
+                    marginBottom: "8px"
                   }}>
-                    ● {item.availability}
+                    {item.category}
                   </span>
+                  <h4 style={{ fontSize: "15px", fontWeight: 600, marginBottom: "6px" }}>{item.name}</h4>
+                  <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "16px" }}>
+                    Owner: {item.ownerName} ({item.building})
+                  </p>
+                  <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      color: item.availability === "Available" ? "#059669" : "#d97706"
+                    }}>
+                      ● {item.availability}
+                    </span>
 
-                  {item.ownerId === user?.id ? (
-                    <Link
-                      to="/my-listings"
-                      style={{
-                        fontSize: "13px",
-                        backgroundColor: "#f1f5f9",
-                        color: "var(--text-main)",
-                        padding: "6px 10px",
-                        borderRadius: "6px",
-                        fontWeight: 600,
-                        textDecoration: "none"
-                      }}
-                    >
-                      My Item (Manage)
-                    </Link>
-                  ) : (
-                    <Link
-                      to={`/item/${item.id}`}
-                      style={{
-                        fontSize: "13px",
-                        color: "var(--primary-color)",
-                        fontWeight: 600,
-                        textDecoration: "none"
-                      }}
-                    >
-                      View Details
-                    </Link>
-                  )}
+                    {item.ownerId === user?.id ? (
+                      <Link
+                        to="/my-listings"
+                        style={{
+                          fontSize: "13px",
+                          backgroundColor: "#f1f5f9",
+                          color: "var(--text-main)",
+                          padding: "6px 10px",
+                          borderRadius: "6px",
+                          fontWeight: 600,
+                          textDecoration: "none"
+                        }}
+                      >
+                        My Item (Manage)
+                      </Link>
+                    ) : (
+                      <Link
+                        to={`/item/${item.id}`}
+                        style={{
+                          fontSize: "13px",
+                          color: "var(--primary-color)",
+                          fontWeight: 600,
+                          textDecoration: "none"
+                        }}
+                      >
+                        View Details
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>
